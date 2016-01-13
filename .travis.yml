@@ -1,37 +1,26 @@
-# Required to run your project under the correct environment.
 language: php
-
-# Versions of PHP you want your project run with.
 php:
-#  - 5.4
-#  - 5.5
-  - 5.6
-  - 7.0
-  - hhvm
-
-# Commands to be run before your environment runs.
+- 5.6
+- 7.0
+- hhvm
 before_script:
-  - composer self-update
-  - composer install --no-interaction --dev
-  - touch ./database/database.sqlite
-  - composer self-update
-  - composer install -n --prefer-source
-  - php artisan migrate --env=testing --database=testing
-  - php artisan migrate --env=testing --seed -n --force  --database=testing
-
-# Commands you want to run that will verify your build.
-#script: phpunit
+- composer self-update
+- composer install --no-interaction --dev
+- touch ./database/database.sqlite
+- composer self-update
+- composer install -n --prefer-source
+- php artisan migrate --env=testing --database=testing
+- php artisan migrate --env=testing --seed -n --force  --database=testing
 script:
-  - phpunit
-
-# allow_failures: Allow this build to fail under the specified environments.
-# fast_finish: If your build fails do not continue trying to build, just stop.
+- phpunit
 matrix:
-  allow_failures:
-
+  allow_failures: 
   fast_finish: true
-
-# Customize when the notification emails are sent.
 notifications:
+  on_success: always
+  on_failure: always
+  webhooks:
+    urls:
+      secure: GGu7lA4o9Xv4fGs/mM0goWE0eMEa7PZpy3L2cwxTMuEuSvTLqPMpm0/mUFLkzWQVRmOaEyjIiMlr8k/dsPb0sYX06Yy14U23fqO6pK5o+nIrzHTWWlNDrBXsHhljBgdzMjAvjZftoDedMgxdpW6gFETQHsOPlMog08utZSSkZxk9bMipnvp+QHbg7Cieh2IHpVyX1lnyxUx/Xt/VF5AyJjpaa17vMWLsNQZ/TZi1lnw4NvKGRM6Hrlz3LuRqtXmgv0FPdnB/DSxp2cJyhNUYzZs+kMGtyENrUC2niXYEmwA/JAKhIKVCbLFCwLUq+hYPJGFrWjQ9i1qT95P1JR47oBA9onYIcaEr9X1Q/8VtsuIEbIaCCiUXmbpPPTunY5GFwAg89zqN5AEBjwEHTkMTdhinqfgG2vsBQHGjgqJJOVLSI7uAPliaPLVqeIvHFilQLTveqXwr89/UuDG/Zs7okICmQ0T/v5MEUsKLM5OiWspodibnS3boIxdnxSF/mdjgW7o6aVL/sf7MO4GFMxYm8lnvmrlcGHaO8ISKc7Vi7fo25FOlv9fTnPRAdHRLOFPVBbuDkPNKPZSSl18KkVKtJoChZ+zM2QQ+jyaQkkw5JT52f5K2BGx2XXgssm9PHgcFvkDuV4LayMatEDt08VxSkDyL1mbBgTaOIYJCLuxZN6U=
     on_success: always
-    on_failure: always
+    on_failure: never
