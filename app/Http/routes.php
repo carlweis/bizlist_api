@@ -11,8 +11,25 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', function() {
+    return redirect('/v1');
+});
+
+Route::group(['namespace' => 'Api'], function ()
+{
+    // version 1
+    Route::group(['namespace' => 'V1', 'prefix' => 'v1'], function ()
+    {
+        // root route
+        Route::get('/', ['as' => 'root_path', function ()
+        {
+            return response()->json([
+                'message' => 'BizList API',
+                'version' => '1.0',
+                'status'  => 200
+            ]);
+        }]);
+    });
 });
 
 /*
@@ -25,7 +42,7 @@ Route::get('/', function () {
 | kernel and includes session state, CSRF protection, and more.
 |
 */
-
-Route::group(['middleware' => ['web']], function () {
-    //
-});
+//
+//Route::group(['middleware' => ['web']], function () {
+//    //
+//});
