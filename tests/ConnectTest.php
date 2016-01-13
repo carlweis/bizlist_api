@@ -18,7 +18,7 @@ class ConnectTest extends TestCase
             ->seeJson([
                 'message' => 'BizList API',
                 'version' => '1.0',
-                'status' => 200
+                'status'  => 200
             ]);
     }
 }
